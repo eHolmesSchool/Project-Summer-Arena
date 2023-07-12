@@ -16,4 +16,17 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+
+
+
+    public enum States{
+        None,
+        Stationary,
+        Walking,
+        Dashing,
+        Shooting,
+        Reloading,
+        Dead,
+
+    }
 }
