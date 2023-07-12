@@ -5,26 +5,30 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public PlayerState currentPlayerState = PlayerState.None;
+
+
     void Start()
     {
-        Debug.Log("If you see this Text Me AAAAAAAAAA");
+        Debug.Log("If you see this Text Evan AAAAAAAAAA");
     }
 
-    // Update is called once per frame
     void Update()
     {
+        switch (currentPlayerState)
+        {
+
+        }
 
     }
 
 
 
-    public enum States{
+    public enum PlayerState{
         None,
-        Stationary,
-        Walking,
+        Alive,
         Dashing,
-        Shooting,
+        //Shooting, Unless we NEED it I dont think this one was a good idea. Cause we can shoot
         Reloading,
         Dead,
 
