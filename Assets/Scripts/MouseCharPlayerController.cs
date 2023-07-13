@@ -42,7 +42,7 @@ public class MouseCharPlayerController : MonoBehaviour
 
                 PlayerMovement();
                 PointToCursor();
-                
+
 
 
                 break;
@@ -66,9 +66,6 @@ public class MouseCharPlayerController : MonoBehaviour
                 break;
 
         }
-
-
-
     }
 
 
@@ -77,16 +74,17 @@ public class MouseCharPlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontal, vertical);
-        Math.Round(movement.x);
-        Math.Round(movement.y);
 
         if (Math.Abs(horizontal)>0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed
         {
             movement /= 2;  //we dont want the player travelling faster diagonally than they would any other way
         }
+        movement *= speed;
 
-        rbPlayer.velocity = movement * speed;
+        Math.Round(movement.x, 0);
+        Math.Round(movement.y, 0);
 
+        rbPlayer.velocity = movement;
     }
 
 
