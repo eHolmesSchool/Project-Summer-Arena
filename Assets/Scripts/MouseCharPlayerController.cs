@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class MouseCharPlayerController : MonoBehaviour
 {
     public PlayerState currentPlayerState = PlayerState.None;
-    [SerializeField] GameObject Player;
+    [SerializeField] float speed = 1;
     Rigidbody2D rbPlayer;
 
     public enum PlayerState
@@ -74,17 +74,19 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
-        rbPlayer.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        Vector2 movement = new Vector2(horizontal, vertical);
+        Math.Round(movement.x);
+        Math.Round(movement.y);
 
-
-        if ( Input.GetAxis("Horizontal") < -0.05 || Input.GetAxis("Horizontal") > 0.05)
+        if (Math.Abs(horizontal)>0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed
         {
-            if (Input.GetAxis("Vertical") < -0.05 || Input.GetAxis("Vertical") > 0.05)
-            {
-                //rbPlayer.velocity.x /= 2;
-                //rbPlayer.velocity.y /= 2; 
-            }
+            movement /= 2;  //we dont want the player travelling faster diagonally than they would any other way
         }
+
+        rbPlayer.velocity = movement * speed;
+
     }
 
 
