@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Alive: //Can become Dashing or Reloading or Dead
 
                 PlayerMovement();
-                PointToMouse();
+                PointToCursor();
                 
 
 
@@ -88,8 +88,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void PointToMouse()
+    private void PointToCursor()
     {
+
         return;
     }
 
