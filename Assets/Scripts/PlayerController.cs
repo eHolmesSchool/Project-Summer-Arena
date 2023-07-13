@@ -81,7 +81,8 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetAxis("Vertical") < -0.05 || Input.GetAxis("Vertical") > 0.05)
             {
-
+                //rbPlayer.velocity.x /= 2;
+                //rbPlayer.velocity.y /= 2; 
             }
         }
     }
