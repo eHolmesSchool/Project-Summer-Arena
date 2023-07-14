@@ -7,6 +7,7 @@ public class MouseCharPlayerController : MonoBehaviour
 {
     public PlayerState currentPlayerState = PlayerState.None;
     [SerializeField] float speed = 1;
+    [SerializeField] float diagonalFactor = 0.75f;
     Rigidbody2D rbPlayer;
 
     public enum PlayerState
@@ -77,7 +78,7 @@ public class MouseCharPlayerController : MonoBehaviour
 
         if (Math.Abs(horizontal)>0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed
         {
-            movement /= 2;  //we dont want the player travelling faster diagonally than they would any other way
+            movement *= diagonalFactor;  //we dont want the player travelling faster diagonally than they would any other way
         }
         movement *= speed;
 
@@ -90,7 +91,12 @@ public class MouseCharPlayerController : MonoBehaviour
 
     private void PointToCursor()
     {
+        Vector3 cursorPos = Input.mousePosition;
+        cursorPos = Camera.main.ScreenToWorldPoint(cursorPos) ;
 
+        Vector2 faceDirection = new Vector2(cursorPos.x - transform.position.x, cursorPos.y - transform.position.y);
+
+        transform.up = faceDirection;
         return;
     }
 
