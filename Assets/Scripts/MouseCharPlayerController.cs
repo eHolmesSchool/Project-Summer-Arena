@@ -70,13 +70,13 @@ public class MouseCharPlayerController : MonoBehaviour
     }
 
 
-    private void PlayerMovement()
+    private void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(horizontal, vertical);
 
-        if (Math.Abs(horizontal)>0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed
+        if (Math.Abs(horizontal)>0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed...
         {
             movement *= diagonalFactor;  //we dont want the player travelling faster diagonally than they would any other way
         }
