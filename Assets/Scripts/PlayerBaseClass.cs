@@ -12,8 +12,8 @@ public class PlayerBaseClass : MonoBehaviour
 
     //[SerializeField]
 
-    float arenaWidth = 26.6f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
-    float arenaHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
+    float screenWidth = 26.6f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
+    float screenHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
 
     public enum PlayerState
     {
@@ -27,8 +27,13 @@ public class PlayerBaseClass : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("If you see this Text Evan AAAAAAAAAA");
         rbPlayer = GetComponent<Rigidbody2D>();
+
+        screenHeight = Camera.main.orthographicSize;
+        screenWidth = screenHeight * (16f / 9f);
+
+
+        Debug.Log(screenWidth + "  " + screenHeight);
     }
 
     void Update()
@@ -79,7 +84,7 @@ public class PlayerBaseClass : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        Vector2 movement = new Vector2(horizontal, vertical);
+        Vector3 movement = new Vector3(horizontal, vertical, 0);
 
         if (Math.Abs(horizontal) > 0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed...
         {
@@ -88,26 +93,26 @@ public class PlayerBaseClass : MonoBehaviour
 
         movement *= speed;
 
-        Math.Round(movement.x, 0);
-        Math.Round(movement.y, 0);
-
-        if (movement.x > 0.05 && transform.position.x > arenaWidth)
+        if (movement.x > 0.05 && transform.position.x > screenWidth)
         {
             movement.x = 0;
         }
-
-        if (transform.position.x < -arenaWidth || transform.position.x  > arenaWidth)
+        if (movement.x < -0.05 && transform.position.x < -screenWidth)
         {
             movement.x = 0;
         }
-        if (transform.position.y  < -arenaHeight || transform.position.y > arenaHeight)
+        if (movement.y > 0.05 && transform.position.y > screenHeight)
+        {
+            movement.y = 0;
+        }
+        if (movement.y < -0.05 && transform.position.y < -screenHeight)
         {
             movement.y = 0;
         }
 
-        Debug.Log(transform.position.x + movement.x);
+        //Debug.Log(transform.position.x + movement.x);
 
-        rbPlayer.velocity = movement;
+        transform.position += movement;
     }
 
 
