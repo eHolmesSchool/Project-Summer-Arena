@@ -32,7 +32,6 @@ public class PlayerBaseClass : MonoBehaviour
         screenHeight = Camera.main.orthographicSize;
         screenWidth = screenHeight * (16f / 9f);
 
-
         Debug.Log(screenWidth + "  " + screenHeight);
     }
 
