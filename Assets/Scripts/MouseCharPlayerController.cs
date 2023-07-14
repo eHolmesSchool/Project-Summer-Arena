@@ -10,6 +10,9 @@ public class MouseCharPlayerController : MonoBehaviour
     [SerializeField] float diagonalFactor = 0.75f;
     Rigidbody2D rbPlayer;
 
+    float arenaWidth = 26.6f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
+    float arenaHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area
+
     public enum PlayerState
     {
         None,
@@ -17,7 +20,6 @@ public class MouseCharPlayerController : MonoBehaviour
         Dashing,
         Reloading,
         Dead,
-
     }
 
 
@@ -30,7 +32,6 @@ public class MouseCharPlayerController : MonoBehaviour
     void Update()
     {
 
-
         switch (currentPlayerState) //Starts on None
         {
             case PlayerState.None: //Moves to Alive
@@ -41,9 +42,10 @@ public class MouseCharPlayerController : MonoBehaviour
 
             case PlayerState.Alive: //Can become Dashing or Reloading or Dead
 
-                PlayerMovement();
+                PlayerMovement(); //This is where we prevent it from flying off the stage
                 PointToCursor();
 
+                CollisionCheck();
 
 
                 break;
@@ -70,6 +72,7 @@ public class MouseCharPlayerController : MonoBehaviour
     }
 
 
+
     private void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -80,11 +83,22 @@ public class MouseCharPlayerController : MonoBehaviour
         {
             movement *= diagonalFactor;  //we dont want the player travelling faster diagonally than they would any other way
         }
+
+        Debug.Log($" ");
+
         movement *= speed;
 
         Math.Round(movement.x, 0);
         Math.Round(movement.y, 0);
 
+        if (transform.position.x + movement.x < -arenaWidth || transform.position.x + movement.x > arenaWidth)
+        {
+            movement.x = 0;
+        }
+        if (transform.position.y + movement.y < -arenaHeight || transform.position.y + movement.y > arenaHeight)
+        {
+            movement.y = 0;
+        }
         rbPlayer.velocity = movement;
     }
 
@@ -101,4 +115,8 @@ public class MouseCharPlayerController : MonoBehaviour
     }
 
 
+    private void CollisionCheck()
+    {
+        return;
+    }
 }
