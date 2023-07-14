@@ -10,8 +10,10 @@ public class PlayerBaseClass : MonoBehaviour
     [SerializeField] float diagonalFactor = 0.75f;
     Rigidbody2D rbPlayer;
 
+    //[SerializeField]
+
     float arenaWidth = 26.6f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
-    float arenaHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area
+    float arenaHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
 
     public enum PlayerState
     {
@@ -81,26 +83,33 @@ public class PlayerBaseClass : MonoBehaviour
 
         if (Math.Abs(horizontal) > 0.05 && Math.Abs(vertical) > 0.05) //If both directions are being pushed...
         {
-            movement *= diagonalFactor;  //we dont want the player travelling faster diagonally than they would any other way
+            movement *= diagonalFactor;  //We dont want the player travelling much faster diagonally than they would any other way
         }
-
-        Debug.Log($" ");
 
         movement *= speed;
 
         Math.Round(movement.x, 0);
         Math.Round(movement.y, 0);
 
-        if (transform.position.x + movement.x < -arenaWidth || transform.position.x + movement.x > arenaWidth)
+        if (movement.x > 0.05 && transform.position.x > arenaWidth)
         {
             movement.x = 0;
         }
-        if (transform.position.y + movement.y < -arenaHeight || transform.position.y + movement.y > arenaHeight)
+
+        if (transform.position.x < -arenaWidth || transform.position.x  > arenaWidth)
+        {
+            movement.x = 0;
+        }
+        if (transform.position.y  < -arenaHeight || transform.position.y > arenaHeight)
         {
             movement.y = 0;
         }
+
+        Debug.Log(transform.position.x + movement.x);
+
         rbPlayer.velocity = movement;
     }
+
 
 
     private void PointToCursor()
