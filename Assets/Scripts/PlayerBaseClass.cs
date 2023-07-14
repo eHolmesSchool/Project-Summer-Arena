@@ -38,48 +38,14 @@ public class PlayerBaseClass : MonoBehaviour
     void Update()
     {
 
-        switch (currentPlayerState) //Starts on None
-        {
-            case PlayerState.None: //Moves to Alive
-
-                currentPlayerState = PlayerState.Alive;
-                break;
-
-
-            case PlayerState.Alive: //Can become Dashing or Reloading or Dead
-
-                PlayerMovement(); //This is where we prevent it from flying off the stage
-                PointToCursor();
-
-                CollisionCheck();
-
-
-                break;
-
-
-            case PlayerState.Dashing: //Can become Alive or Dead(?) 
-
-
-                break;
-
-
-            case PlayerState.Reloading: //Can become Alive or Dead
-
-
-                break;
-
-
-            case PlayerState.Dead: //Can become None
-
-
-                break;
+        { 
 
         }
     }
 
 
 
-    private void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
+    public void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -116,7 +82,7 @@ public class PlayerBaseClass : MonoBehaviour
 
 
 
-    private void PointToCursor()
+    public void PointToCursor()
     {
         Vector3 cursorPos = Input.mousePosition;
         cursorPos = Camera.main.ScreenToWorldPoint(cursorPos);
@@ -128,7 +94,7 @@ public class PlayerBaseClass : MonoBehaviour
     }
 
 
-    private void CollisionCheck()
+    public void CollisionCheck()
     {
         return;
     }
