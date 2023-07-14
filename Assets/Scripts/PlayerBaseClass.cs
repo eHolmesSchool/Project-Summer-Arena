@@ -8,12 +8,11 @@ public class PlayerBaseClass : MonoBehaviour
     public PlayerState currentPlayerState = PlayerState.None;
     [SerializeField] float speed = 1;
     [SerializeField] float diagonalFactor = 0.75f;
-    Rigidbody2D rbPlayer;
 
-    //[SerializeField]
+    [SerializeField] GameObject Projectile;
 
-    float screenWidth = 26.6f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
-    float screenHeight = 15; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
+    float screenWidth = 0f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
+    float screenHeight = 0f; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
 
     public enum PlayerState
     {
@@ -27,23 +26,20 @@ public class PlayerBaseClass : MonoBehaviour
 
     void Start()
     {
-        rbPlayer = GetComponent<Rigidbody2D>();
-
         screenHeight = Camera.main.orthographicSize;
         screenWidth = screenHeight * (16f / 9f);
 
         Debug.Log(screenWidth + "  " + screenHeight);
+
+        //Add Function To Instantiate like 10 Bullets and put them in a list.
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
+    //    { 
 
-        { 
-
-        }
-    }
-
-
+    //    }
+    //}
 
     public void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
     {
