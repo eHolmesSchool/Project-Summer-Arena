@@ -18,7 +18,7 @@ public class MouseCharPlayerController : PlayerBaseClass
 
             case PlayerState.Alive: //Can become Dashing or Reloading or Dead
 
-                PlayerMovement(); //This is where we prevent it from flying off the stage
+                PlayerInput(transform); //This is where we prevent it from flying off the stage
                 PointToCursor();
 
                 CollisionCheck();
@@ -26,7 +26,7 @@ public class MouseCharPlayerController : PlayerBaseClass
                 break;
 
 
-            case PlayerState.Dashing: //Can become Alive or Dead(?) 
+            case PlayerState.Dashing: //Can become Alive or Dead(?) maybe its invic while dashing, maybe some are and others arnt
 
 
                 break;

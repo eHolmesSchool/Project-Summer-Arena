@@ -11,8 +11,8 @@ public class PlayerBaseClass : MonoBehaviour
 
     [SerializeField] GameObject Projectile;
 
-    float screenWidth = 0f;  ////////////////////////////////////////////This is the current "solution" to prevent the player leaving the screen
-    float screenHeight = 0f; ////////////////////////////////////////////It simply stops the player from travelling past a predefined area. No collision used here
+    float screenWidth = 0f;  //////////////////////////////////////////// This is the current "solution" to prevent the player leaving the screen
+    float screenHeight = 0f; //////////////////////////////////////////// It simply stops the player from travelling past a predefined area. No collision used here
 
     public enum PlayerState
     {
@@ -40,6 +40,23 @@ public class PlayerBaseClass : MonoBehaviour
 
     //    }
     //}
+
+    public void PlayerInput(Transform trans)
+    {
+        if (Input.GetMouseButtonDown(0)) //fireBullet
+        {
+            //Debug.Log("Click!");
+            FireBullet(trans);
+        }
+        PlayerMovement();
+    }
+
+    private void FireBullet(Transform t)
+    {
+        GameObject bullet = ObjectPoolingManager.instance.GetTheObject();
+        bullet.transform.position = t.position;
+        bullet.transform.forward = t.forward;
+    }
 
     public void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
     {
