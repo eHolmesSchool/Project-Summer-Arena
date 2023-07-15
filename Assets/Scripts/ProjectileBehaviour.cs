@@ -24,16 +24,18 @@ public class ProjectileBehaviour : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.up * speed);
+        transform.position += transform.up * speed;
         //transform.Rotate(Vector3.forward * 0.1f); //Speen
+        Vector3 pos = transform.position;
+        if (pos.x <-1000 ||  pos.y <-1000 || pos.x >  1000 || pos.y > 1000)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision) 
     {
-
-
-
-        gameObject.SetActive(false);
-        transform.position = new(0, 0, 0);
+        //gameObject.SetActive(false);
+        //transform.position = new(0, 0, 0);
     }
 }

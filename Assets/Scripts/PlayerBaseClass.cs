@@ -55,7 +55,7 @@ public class PlayerBaseClass : MonoBehaviour
     {
         GameObject bullet = ObjectPoolingManager.instance.GetTheObject();
         bullet.transform.position = t.position;
-        bullet.transform.forward = t.forward;
+        bullet.transform.up = t.up;
     }
 
     public void PlayerMovement() //This could be tweaked to snap to speed 1 or -1 but works fiiinnneee now.
